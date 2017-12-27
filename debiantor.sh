@@ -19,7 +19,11 @@ readonly non_tor="127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
 
 start() {
 
-    # save current iptables rules
+    # check torrc config file 
+    check=$(grep VirtualAddrNetworkIPv4 /etc/tor/torrc)
+    if [[ $check == "" ]]; then
+    printf "VirtualAddrNetworkIPv4 10.192.0.0\nAutomapHostsOnResolve 1\nTransPort 9040\nSocksPort 9050\nDNS Port 5353\n" >> /etc/tor/torrc
+fi    # save current iptables rules
     printf "Backup iptables rules... "
 
     if ! iptables-save > "iptables.backup"; then
