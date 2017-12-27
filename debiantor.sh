@@ -22,7 +22,7 @@ start() {
     # check torrc config file 
     check=$(grep VirtualAddrNetworkIPv4 /etc/tor/torrc)
     if [[ $check == "" ]]; then
-    printf "VirtualAddrNetworkIPv4 10.192.0.0\nAutomapHostsOnResolve 1\nTransPort 9040\nSocksPort 9050\nDNS Port 5353\n" >> /etc/tor/torrc
+    printf "VirtualAddrNetworkIPv4 10.192.0.0/10\nAutomapHostsOnResolve 1\nTransPort 9040\nSocksPort 9050\nDNSPort 5353\n" >> /etc/tor/torrc
 fi    # save current iptables rules
     printf "Backup iptables rules... "
 
