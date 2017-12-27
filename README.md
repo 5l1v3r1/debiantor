@@ -14,15 +14,16 @@ DNSPort 5353
 
 2. Run Tor
 
-# service tor start
+ service tor start
 or
-# tor
+ tor
 or
-# /etc/init.d/tor start
+ /etc/init.d/tor start
 
-3. Run script as root
-# ./debiantor.sh --start
+3. Set permissions and run script as root
+chmod +x debiantor.sh
+sudo ./debiantor.sh --start
 
 4. Stop script
 
-# ./debiantor.sh --stop
+sudo ./debiantor.sh --stop
