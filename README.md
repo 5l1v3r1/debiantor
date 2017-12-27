@@ -2,22 +2,9 @@
 Torify Debian
 Based on Kalitorify https://github.com/brainfucksec/kalitorify
 
-1. Instructions:
+Instructions:
 
-Copy to your /etc/tor/torrc config file:
-
-VirtualAddrNetworkIPv4 10.192.0.0/10
-
-AutomapHostsOnResolve 1
-
-TransPort 9040
-
-SocksPort 9050
-
-DNSPort 5353
-
-
-2. Run Tor
+1. Run Tor
 
  service tor start
 or
@@ -25,10 +12,10 @@ or
 or
  /etc/init.d/tor start
 
-3. Set permissions and run script as root
+2. Set permissions and run script as root
 chmod +x debiantor.sh
 sudo ./debiantor.sh --start
 
-4. Stop script
+3. Stop script
 
 sudo ./debiantor.sh --stop
