@@ -17,12 +17,19 @@ readonly virtual_addr_net="10.192.0.0/10"
 readonly non_tor="127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
 ## End of Network settings
 
-start() {
+checkroot() {
+    if [[ "$(id -u)" -ne 0 ]]; then
+	printf "Please, run as root!\n"
+	exit 1
+    fi
+}
 
+start() {
+    checkroot
     # check torrc config file 
     check=$(grep VirtualAddrNetworkIPv4 /etc/tor/torrc)
     if [[ $check == "" ]]; then
-    printf "Restart Tor and run script again\n"
+    printf "Configured /etc/tor/torrc. Restart Tor and run script again\n"
     printf "VirtualAddrNetworkIPv4 10.192.0.0/10\nAutomapHostsOnResolve 1\nTransPort 9040\nSocksPort 9050\nDNSPort 5353\n" >> /etc/tor/torrc
     exit 1
     fi    
@@ -99,7 +106,7 @@ start() {
 
 ## Stop transparent proxy
 stop() {
-
+    checkroot
     printf "Stopping Transparent Proxy\n"
 
     ## Resets default settings
