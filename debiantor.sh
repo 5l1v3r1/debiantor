@@ -26,6 +26,12 @@ checkroot() {
 
 start() {
     checkroot
+    # check program is already running
+    check1=$(iptables -L | grep -o "owner")
+    if [[ $check1 == "owner" ]]; then
+    printf "Debiantor already running. Use --stop to stop\n"
+    exit 1
+    fi
     # check torrc config file 
     check=$(grep VirtualAddrNetworkIPv4 /etc/tor/torrc)
     if [[ $check == "" ]]; then
